@@ -15,23 +15,24 @@ pygame.display.set_icon(icon)
 playerImg = pygame.image.load('player.png')
 playerX = 370
 playerY = 380
+playerX_change = 0
 
 
-def player():
-    screen.blit(playerImg, (playerX, playerY))
+def player(x, y):
+    screen.blit(playerImg, (x, y))
 
 
 # membuat variabel untuk infinite loop sehingga tampilan game tetap menyala
 running = True
 while running:
 
-    #Red, Green, Blue
+    # Red, Green, Blue
     screen.fill((0, 0, 0))
-
+    playerX += 0.1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # membuat pengondisian untuk agar program
             running = False  # keluar ketika user klik sebuah button
 
     # RGB - Red Green and Blue untuk background gambar screen-nya
-    player() #memanggil method player
+    player(playerX, playerY)  # memanggil method player
     pygame.display.update()
