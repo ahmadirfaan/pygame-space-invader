@@ -1,4 +1,5 @@
 import pygame  # membutuhkan packages atau library pygame
+from pygame import mixer
 import random
 import math
 
@@ -10,6 +11,10 @@ screen = pygame.display.set_mode((800, 600))
 
 # Membuat gambar halaman belakang
 background = pygame.image.load('background.png')
+
+# membuat background music
+mixer.music.load('background.wav')
+mixer.music.play(-1)
 
 # Title and Icon
 pygame.display.set_caption("Game Python DTS ProA-Academy Space Invades")
@@ -101,6 +106,8 @@ while running:
                 playerX_change = 5
             if event.key == pygame.K_SPACE:
                 if bullet_state == "ready":
+                    bullet_sound = mixer.Sound('laser.wav')
+                    bullet_sound.play()
                     # membuat koordinat x peluru sama dengan player sehingga peluru keluar dari tampilan player
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
@@ -129,6 +136,8 @@ while running:
         # Collision
         collision = isCollision(enemyX[i], enemyY[i], bulletX, bulletY)
         if collision:
+            explosion_sound = mixer.Sound('explosion.wav')
+            explosion_sound.play()
             bulletY = 480
             bullet_state = "ready"
             score_value += 1
